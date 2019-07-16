@@ -7,13 +7,17 @@ from selenium.webdriver.support.ui import Select
 import config
 
 driver = webdriver.Firefox()
-imp_wait = driver.implicitly_wait(5)
 
 
 def navigation():
     driver.get('https://www.kfcpakistan.com')
-    driver.find_element(By.XPATH, '(//*[@id="dropdownTest"])[2]').click()
-
+    driver.find_element(By.XPATH, '(//*[@id="dropdownTest"])[3]').click()
+    driver.implicitly_wait(5)
+    driver.find_element(By.XPATH, '/html/body/app-root/div[1]/app-base/mat-sidenav-container/mat-sidenav-content/app-collections/div/div[2]/div/div/div/product-card[3]/div/div[2]/div[2]/button').click()
+    driver.find_element(By.CSS_SELECTOR, 'body > app-root > div:nth-child(1) > app-base > mat-sidenav-container > mat-sidenav-content > app-product > div > div:nth-child(3) > div.productInfo > div.pt-2.ng-star-inserted > div.row > div:nth-child(2) > button').click()
+    driver.find_element(By.XPATH, '/html/body/app-root/div[1]/app-base/mat-sidenav-container/mat-sidenav/kfc-cart/div/div[2]/div/div/mat-form-field[1]/div/div[1]').click()
+    time.sleep(5)
+    # driver.find_element(By.ID, 'mat-option-150').click()
 
 
 try:
