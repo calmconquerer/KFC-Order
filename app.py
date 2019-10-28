@@ -3,12 +3,12 @@ import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
-import config
+from config import exports
 
-# options = webdriver.FirefoxOptions("--headless")
+options = webdriver.FirefoxOptions()
+# options.add_argument("-headless")
 
-driver = webdriver.Firefox()
+driver = webdriver.Firefox(options=options)
 
 
 def navigation():
@@ -28,8 +28,8 @@ def navigation():
 
     islamabad = driver.find_element(By.XPATH, '//*[@id="mat-option-7"]')
     islamabad.click()
-    address = driver.find_element(By.XPATH, '//*[@id="mat-input-1"]')
-    address.send_keys("I-10/4")
+    location = driver.find_element(By.XPATH, '//*[@id="mat-input-1"]')
+    location.send_keys(exports['Location'])
     WebDriverWait(driver, 100).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="mat-option-28"]')))
     driver.find_element(By.XPATH, '//*[@id="mat-option-28"]').click()
     next = driver.find_element(By.XPATH, "/html/body/app-root/div[1]/app-base/mat-sidenav-container/mat-sidenav/kfc-cart/div/div[2]/div/div/button")
@@ -42,7 +42,7 @@ def navigation():
     #                                          "/html/body/app-root/div[1]/app-base/mat-sidenav-container/mat-sidenav-content/div/app-checkout/div/div[2]/div[2]/div[1]/div[1]/mat-card/form/mat-card-content[1]/mat-button-toggle-group/mat-button-toggle[2]/label/div")
     # check_out_as_guest.click()
     email_input = driver.find_element(By.XPATH, '//*[@id="frmEmailA"]')
-    email_input.send_keys("wasiullah.khan21@gmail.com")
+    email_input.send_keys(exports['Email_Address'])
 
     continue_as_guest = driver.find_element(By.XPATH, "/html/body/app-root/div[1]/app-base/mat-sidenav-container/mat-sidenav-content/div/app-checkout/div/div[2]/div[2]/div[1]/div[1]/mat-card/form/mat-card-content[3]/button")
     continue_as_guest.click()
@@ -50,14 +50,14 @@ def navigation():
     WebDriverWait(driver, 100).until(EC.element_to_be_clickable, '//*[@id="frmNameA"]')
 
     full_name = driver.find_element(By.XPATH, '//*[@id="frmNameA"]')
-    full_name.send_keys("WasiUllah Khan")
+    full_name.send_keys(exports['Full_Name'])
 
-    address_input = driver.find_element(By.XPATH, '//*[@id="frmAddressS"]')
-    address_input.send_keys("House # 841, main service road, I-10/4")
+    address = driver.find_element(By.XPATH, '//*[@id="frmAddressS"]')
+    address.send_keys(exports['Address'])
 
     WebDriverWait(driver, 100).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="mat-input-5"]')))
     phone_input = driver.find_element(By.XPATH, '//*[@id="mat-input-5"]')
-    phone_input.send_keys("3325799477")
+    phone_input.send_keys(exports['Phone_Number'])
     time.sleep(5)
 
     continue_to_payment = driver.find_element(By.XPATH, "/html/body/app-root/div[1]/app-base/mat-sidenav-container/mat-sidenav-content/div/app-checkout/div/div[2]/div[2]/div[1]/div[2]/form/mat-card/mat-card-content[2]/button")
@@ -76,4 +76,4 @@ try:
     navigation()
 finally:
     print('working')
-    # driver.quit()
+    driver.quit()
